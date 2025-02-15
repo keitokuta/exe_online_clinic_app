@@ -1,0 +1,31 @@
+{
+    "name": "exe-online-clinic-app",
+    "version": "1.0.0",
+    "description": "オンライン診療予約アプリケーション",
+    "private": true,
+    "workspaces": [
+        "src/frontend",
+        "src/backend"
+    ],
+    "scripts": {
+        "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+        "start:frontend": "cd src/frontend && npm start",
+        "start:backend": "cd src/backend && npm start",
+        "test": "concurrently \"npm run test:frontend\" \"npm run test:backend\"",
+        "test:frontend": "cd src/frontend && npm test",
+        "test:backend": "cd src/backend && npm test",
+        "build": "concurrently \"npm run build:frontend\" \"npm run build:backend\"",
+        "build:frontend": "cd src/frontend && npm run build",
+        "build:backend": "cd src/backend && npm run build"
+    },
+    "dependencies": {
+        "concurrently": "^8.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

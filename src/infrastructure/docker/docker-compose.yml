@@ -1,0 +1,8 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+  database:
+    image: postgres:13
+  redis:
+    image: redis:6

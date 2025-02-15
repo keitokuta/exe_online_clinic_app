@@ -1,0 +1,254 @@
+src:
+  structure.yaml:
+    content: |-
+      オンライン診療予約アプリケーション
+      - クロスプラットフォーム対応
+      - リアルタイム予約・通知システム
+      - セキュアな医療情報管理
+      
+      主要機能:
+      - ユーザー認証
+      - 医師検索
+      - 予約管理
+      - リアルタイムチャット
+      - プッシュ通知
+      
+      技術スタック:
+      - フロントエンド: React Native (Expo)
+      - バックエンド: Node.js, Express
+      - リアルタイム通信: Socket.io
+      - データベース: PostgreSQL
+      - 認証: Firebase Authentication
+      
+      agent選定理由: claude-3-5-sonnetは複雑なヘルスケアシステムの設計に優れています。
+    dependency: []
+    ref: "オンライン医療予約システム - seek.foryour.light"
+    agent: "claude-3-5-sonnet-20241022"
+    api: []
+
+  frontend:
+    mobile:
+      screens:
+        auth:
+          login.tsx:
+            content: |-
+              ログイン画面コンポーネント
+              - メールアドレス/パスワード入力
+              - ソーシャルログイン
+              - パスワードリセット
+              - バリデーション処理
+              
+              agent選定理由: gemini-1.5-proはクロスプラットフォームUI設計に最適
+            dependency:
+              - src/frontend/hooks/useAuth.ts
+              - src/frontend/components/input.tsx
+            agent: "gemini-1.5-pro"
+            api: []
+
+          signup.tsx:
+            content: |-
+              新規登録画面
+              - 患者/医師アカウント選択
+              - 個人情報入力
+              - 本人確認プロセス
+              - 利用規約同意
+              
+              agent選定理由: gemini-1.5-proは複雑なフォーム設計に強い
+            dependency:
+              - src/frontend/hooks/useAuth.ts
+              - src/frontend/components/input.tsx
+            agent: "gemini-1.5-pro"
+            api: []
+
+        doctor:
+          search.tsx:
+            content: |-
+              医師検索画面
+              - 専門分野フィルター
+              - 地域検索
+              - 医師プロフィール表示
+              - リアルタイム検索結果
+              
+              agent選定理由: gemini-2.0-flash-expは検索機能の実装に適している
+            dependency:
+              - src/frontend/hooks/useDoctorSearch.ts
+              - src/frontend/components/doctor-card.tsx
+            agent: "gemini-2.0-flash-exp"
+            api: []
+
+          profile.tsx:
+            content: |-
+              医師詳細プロフィール
+              - 専門分野
+              - 経歴
+              - 空き枠カレンダー
+              - 予約可能時間表示
+              
+              agent選定理由: gemini-2.0-flash-expは詳細表示に最適
+            dependency:
+              - src/frontend/hooks/useDoctorProfile.ts
+              - src/frontend/components/availability-calendar.tsx
+            agent: "gemini-2.0-flash-exp"
+            api: []
+
+        booking:
+          schedule.tsx:
+            content: |-
+              予約スケジュール画面
+              - 医師の空き枠表示
+              - 日時選択
+              - 予約確定プロセス
+              - 予約詳細確認
+              
+              agent選定理由: gemini-1.5-proはスケジュール管理に強い
+            dependency:
+              - src/frontend/hooks/useBooking.ts
+              - src/frontend/components/time-slot.tsx
+            agent: "gemini-1.5-pro"
+            api: []
+
+        chat:
+          conversation.tsx:
+            content: |-
+              リアルタイムチャット画面
+              - メッセージ送受信
+              - 添付ファイル共有
+              - 既読機能
+              - 医療関連メッセージフィルター
+              
+              agent選定理由: gemini-2.0-flash-expはリアルタイム通信UIに適している
+            dependency:
+              - src/frontend/hooks/useChat.ts
+              - src/frontend/components/message-input.tsx
+            agent: "gemini-2.0-flash-exp"
+            api: []
+
+  backend:
+    api:
+      v1:
+        auth:
+          register.ts:
+            content: |-
+              ユーザー登録API
+              - バリデーション
+              - パスワードハッシュ
+              - アカウント作成
+              - JWT発行
+              
+              agent選定理由: deepseek-chatは認証システムの実装に優れている
+            dependency:
+              - src/backend/services/user-service.ts
+              - src/backend/models/user.ts
+            agent: "gpt-4o"
+            api: []
+
+        doctors:
+          search.ts:
+            content: |-
+              医師検索API
+              - 専門分野フィルター
+              - 地域検索
+              - ページネーション
+              - キャッシュ最適化
+              
+              agent選定理由: gpt-4oは複雑な検索ロジックに強い
+            dependency:
+              - src/backend/services/doctor-service.ts
+              - src/backend/models/doctor.ts
+            agent: "gpt-4o"
+            api: []
+
+        bookings:
+          create.ts:
+            content: |-
+              予約作成API
+              - 空き枠チェック
+              - 予約重複防止
+              - 通知トリガー
+              - 予約確定処理
+              
+              agent選定理由: deepseek-reasonerは予約システムの論理的処理に最適
+            dependency:
+              - src/backend/services/booking-service.ts
+              - src/backend/models/booking.ts
+            agent: "gpt-4o"
+            api: []
+
+    services:
+      notification-service.ts:
+        content: |-
+          通知サービス
+          - プッシュ通知
+          - メール通知
+          - リアルタイム通知
+          - 通知テンプレート管理
+          
+          agent選定理由: claude-3-5-sonnetは通知システムの設計に優れている
+        dependency:
+          - src/backend/models/notification.ts
+        agent: "claude-3-5-sonnet-20241022"
+        api: []
+
+  database:
+    migrations:
+      20240101_initial_schema.sql:
+        content: |-
+          データベーススキーマ初期化
+          - ユーザーテーブル
+          - 医師テーブル
+          - 予約テーブル
+          - チャットメッセージテーブル
+          
+          agent選定理由: gpt-4o-miniは軽量なデータベーススキーマ設計に適している
+        dependency: []
+        agent: "gpt-4o-mini"
+        api: []
+
+  config:
+    .env:
+      content: |-
+        # 本番環境設定
+        DATABASE_URL=postgresql://user:pass@host:port/database
+        JWT_SECRET=your_secret_key
+        FIREBASE_API_KEY=your_firebase_key
+        
+        agent選定理由: claude-3-5-sonnetは環境変数管理に優れている
+      dependency: []
+      agent: "claude-3-5-sonnet-20241022"
+      api: []
+
+  tests:
+    e2e:
+      booking-flow.test.ts:
+        content: |-
+          予約フローのエンドツーエンドテスト
+          - ユーザー登録
+          - 医師検索
+          - 予約作成
+          - チャット機能
+          
+          agent選定理由: deepseek-reasonerは複雑なテストシナリオに最適
+        dependency:
+          - src/backend/api/v1/bookings/create.ts
+          - src/frontend/screens/booking/schedule.tsx
+        agent: "gpt-4o"
+        api: []
+
+  infrastructure:
+    docker:
+      docker-compose.yml:
+        content: |-
+          # コンテナ構成
+          version: '3'
+          services:
+            backend:
+              build: ./backend
+            database:
+              image: postgres:13
+            redis:
+              image: redis:6
+          
+          agent選定理由: gpt-3.5-turboはコンテナ設定に適している
+        dependency: []
+        agent: "gpt-3.5-turbo"
+        api: []
